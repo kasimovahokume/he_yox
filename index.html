@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="az">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Məni Bağışla</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #ffd6e8, #e8c5f0);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: white;
+            border-radius: 30px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            text-align: center;
+            max-width: 450px;
+            width: 100%;
+        }
+
+        .cat-image {
+            width: 250px;
+            height: 250px;
+            margin: 0 auto 25px;
+            object-fit: cover;
+            border-radius: 20px;
+            display: block;
+        }
+
+        h1 {
+            font-size: 26px;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        p {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 30px;
+            line-height: 1.6;
+            white-space: pre-line;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        button {
+            padding: 12px 35px;
+            font-size: 18px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-yes {
+            background: #a855f7;
+            color: white;
+        }
+
+        .btn-no {
+            background: #e2e8f0;
+            color: #64748b;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <img id="displayImage" src="./project/assets/images/heyox1.jpg" class="cat-image" alt="cat">
+
+    <h1 id="title">Əsəbləşdin?</h1>
+    <p id="subtitle"></p>
+
+    <div class="buttons">
+        <button class="btn-yes" onclick="handleYes()">Evet</button>
+        <button class="btn-no" id="noBtn" onclick="handleNo()">Hayır</button>
+    </div>
+</div>
+
+<script>
+    let stage = 1;
+
+    const stages = {
+        1: {
+            title: "Soyuglug keçdi?",
+            subtitle: "",
+            src: "./project/assets/images/heyox2.jpg"
+        },
+        2: {
+            title: "Keçdi yəqin",
+            subtitle: "",
+            src: "./project/assets/images/heyox1.jpg"
+        },
+        3: {
+            title: "Barışaq",
+            subtitle: "",
+            src: "./project/assets/images/heyox3.jpg"
+        },
+        4: {
+            title: "He tamam barışdıq",
+            subtitle: "",
+            src: "./project/assets/images/heyox6.jpg"
+        },
+        5: {
+            title: "Hələ də yox basırsan?",
+            subtitle: "",
+            src: "./project/assets/images/heyox2.jpg"
+        },
+        6: {
+            title: "Gəl hə de qutarsın",
+            subtitle: "",
+            src: "./project/assets/images/heyox5.jpg"
+        },
+        7: {
+            title: "He barışdıq məncə",
+            subtitle: "",
+            src: "./project/assets/images/heyox4.jpg"
+        },
+        final: {
+            title: "💌 Son sözüm",
+            subtitle: `Məni tanıyassan axırda
+necə biri olduğumu görərsən
+(yaxşı mənada, təbii ki 😌)
+
+Gecən xeyrə 🌙
+Sabah imtahandı,
+get sabahkı imtahandan 40+ yığ 💪
+
+ hələlik…`,
+            src: "./project/assets/images/heyox2.jpg"
+        }
+    };
+
+    function handleNo() {
+        if (stage < 7) {
+            stage++;
+            updateStage();
+            if (stage === 7) {
+                document.getElementById("noBtn").classList.add("hidden");
+            }
+        }
+    }
+
+    function handleYes() {
+        stage = "final";
+        updateStage();
+        document.getElementById("noBtn").classList.add("hidden");
+    }
+
+    function updateStage() {
+        const current = stages[stage];
+        document.getElementById("displayImage").src = current.src;
+        document.getElementById("title").textContent = current.title;
+        document.getElementById("subtitle").textContent = current.subtitle || "";
+    }
+</script>
+
+</body>
+</html>
